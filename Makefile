@@ -6,38 +6,50 @@
 #    By: jalamell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 13:18:09 by jalamell          #+#    #+#              #
-#    Updated: 2021/12/29 12:54:01 by jalamell         ###   ########lyon.fr    #
+#    Updated: 2022/04/26 19:26:15 by jalamell         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror
-SRC_DIR=src/
-OBJ_DIR=obj/
-FILES=main hsl_to_rgb
-SRC=$(addprefix $(SRC_DIR),$(addsuffix .c,$(FILES)))
-OBJ=$(addprefix $(OBJ_DIR),$(addsuffix .o,$(FILES)))
+CFLAGS=-Wall -Wextra -Werror -fsanitize=address -g3 -I $(INCL_DIR)
+
+SRC_DIR=src
+OBJ_DIR=.obj
+INCL_DIR=incl
+
+FILES=main hsl_to_rgb data fractal cpx input hook
+FILES_CL=main hsl_to_rgb data fractal cpx input hook
+HEADER=fractol_struct fractol
+HEADER_CL=fractol_struct fractol
+
+SRC=$(addprefix $(SRC_DIR)/,$(addsuffix .c,$(FILES)))
+OBJ=$(addprefix $(OBJ_DIR)/,$(addsuffix .o,$(FILES)))
+HEAD=$(addprefix $(INCL_DIR)/,$(addsuffix .h,$(HEADER)))
 NAME=out
-FRAMEWORK=-framework OpenGL -framework AppKit
-MLX_DIR=minilibx/
-MLX=$(addprefix $(MLX_DIR), libmlx.a)
+
+FRAMEWORK=-framework OpenGL -framework AppKit -framework OpenCL
+MLX_DIR=minilibx
+MLX=$(addprefix $(MLX_DIR)/, libmlx.a)
 all: $(NAME)
 
 clean:
-	rm -f $(OBJ) $(OBJ_B)
+	rm -Rf $(OBJ_DIR)
 	@make -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(MLX)
 
 re: fclean all
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile $(MLX)
-	$(CC) $(CFLAGS) -I ./minilibx/ -o $@ -c $<
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile $(HEAD)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I $(MLX_DIR) -o $@ -c $<
 
 $(NAME): $(MLX) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -L ./minilibx/ -l mlx $(FRAMEWORK) -lm -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -L $(MLX_DIR) -l mlx $(FRAMEWORK) -lm -o $(NAME)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 $(MLX):
 	@make -C $(MLX_DIR) 
