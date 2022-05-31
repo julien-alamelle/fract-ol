@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_extra.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/27 14:18:30 by jalamell          #+#    #+#             */
-/*   Updated: 2022/05/27 15:54:42 by jalamell         ###   ########lyon.fr   */
+/*   Created: 2022/05/27 15:43:58 by jalamell          #+#    #+#             */
+/*   Updated: 2022/05/27 15:54:50 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include <stdlib.h>
-#include "fractol.h"
+#include "fractol_extra.h"
 #include <math.h>
 
 int	ft_exit(void *param)

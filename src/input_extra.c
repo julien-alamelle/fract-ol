@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   input_extra.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:25:27 by jalamell          #+#    #+#             */
-/*   Updated: 2022/05/27 15:32:54 by jalamell         ###   ########lyon.fr   */
+/*   Created: 2022/05/27 15:43:23 by jalamell          #+#    #+#             */
+/*   Updated: 2022/05/27 15:43:43 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "fractol.h"
+#include "fractol_extra.h"
 
 static double	atod(char **s)
 {

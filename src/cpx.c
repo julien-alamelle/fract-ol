@@ -6,11 +6,11 @@
 /*   By: jalamell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 16:57:48 by jalamell          #+#    #+#             */
-/*   Updated: 2021/12/30 17:07:11 by jalamell         ###   ########lyon.fr   */
+/*   Updated: 2022/05/31 18:11:14 by jalamell         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol_struct.h"
+#include "fractol.h"
 #include <math.h>
 
 t_cpx	cpx(double r, double i)
@@ -52,9 +52,9 @@ t_cpx	cpx_neg(t_cpx cpx)
 t_cpx	cpx_inv(t_cpx cpx)
 {
 	t_cpx			ret;
-	const double	length = hypot(cpx.r, cpx.i);
+	const double	length = 1. / (cpx.r * cpx.r + cpx.i * cpx.i);
 
-	ret.r = cpx.r / length;
-	ret.i = -cpx.i / length;
+	ret.r = cpx.r * length;
+	ret.i = -cpx.i * length;
 	return (ret);
 }
